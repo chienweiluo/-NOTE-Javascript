@@ -46,3 +46,5 @@
 `
 
 
+
+參考資料: [what-is-the-execution-context-in-javascript](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
