@@ -138,10 +138,6 @@ two = new Object()中Object是構造函數<br/>
 
 >但是__proto__的使用上一個不小心就會大破壞原有的繼承關係,<br/>
 >所以養成良好的習慣, 實務上使用‵getPropertyOf‵ 來取原型鍊即可<br/>
-<br/>
+<br/> 
 
-<img src="http://www.mollypages.org/tutorials/jsobj_full.jpg">
-
-
-
-參考資料: [creeperyang大神的github](https://github.com/creeperyang/blog/issues/9), [TB技術共筆huli大](http://blog.techbridge.cc/2017/04/22/javascript-prototype/?utm_source=tuicool&utm_medium=referral), [Jason大-聽你blog](http://www.jasonsi.com/2017/03/15/36/), [mollypages](http://www.mollypages.org/tutorials/js.mp), [Jichao Ouyan大的理解JavaScript的原型链和继承](理解JavaScript的原型链和继承)
+參考資料: [creeperyang大神的github](https://github.com/creeperyang/blog/issues/9), [TB技術共筆huli大](http://blog.techbridge.cc/2017/04/22/javascript-prototype/?utm_source=tuicool&utm_medium=referral), [Jason大-聽你blog](http://www.jasonsi.com/2017/03/15/36/), [Jichao Ouyan大的理解JavaScript的原型链和继承](理解JavaScript的原型链和继承)
