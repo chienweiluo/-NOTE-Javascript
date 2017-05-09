@@ -3,6 +3,7 @@
 ## JS原型鍊
 
 ---
+### 先知道
 
 1.
 
@@ -21,7 +22,7 @@
 
 `prototype`: 只有函數才有的prototype屬性, 因為沒有class的概念, js就用 function 來模擬類似的概念.
 
-當你創建一個函數的時候, JS會自動為你的函數新增prototype屬性(對應到的是空對象), 而一旦把這個函數以new 調用, js就會幫你新建一個這個構造函數的instance,  
+當你創建一個函數的時候, JS會自動為你的函數新增prototype屬性(對應到的是空對象), 而一旦以new 調用, js就會幫你新建一個這個構造函數的instance,  
 
 而這個instance 繼承了構造函數中的所有屬性 和 方法, 
 
@@ -34,6 +35,8 @@ Javascript 裡面所有的數據類型都是對象Object, 所以繼承以及原�
 
 
 ---
+
+### 本文
 
 JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的class 相似語法糖), 但確實是有個類似的機制來實現
 
@@ -74,11 +77,10 @@ JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的
 
 所以就想到一個把function綁到 `Person.prototype` 上面, 以讓所有Person的 instance 都可以共享這個辦法
 
-`
-所有實力最對象需要共享的屬性和方法就會放到.prototype裡, 而不需要共享的就會放在構造函數constructor <br>
-所以只要更動prototype對象, 就會同時影像到所有instance
 
-`
+>所有實例對象需要共享的屬性和方法就會放到.prototype裡, 而不需要共享的就會放在構造函數constructor <br>
+>所以只要更動prototype對象, 就會同時影響到所有instance
+
 
 >你有一個叫做`Person`的函數, 就可以把`Person`當作constructor, <br/>
 >利用`var obj = new Person()`來new出一個`Person` 的instance,<br/>
@@ -98,8 +100,8 @@ tips: 這時候使用this關鍵字, 就會指向新建造的實例nick,peter
 
 在這個例子中可以知道: <br>
 instance的__proto__就是Function.prototype(因為是function把它製造出來的)<br>
-Function的__proto__就是製造它出來的Function.prototype.<br>
-Function.prototype的__proto__ 會指向 Object.prototype<br>
+Function的__proto__就是製造它出來的Function.prototype.(Function instanceof Function== true)<br>
+Function.prototype的__proto__ 會指向 Object.prototype(之後就是null)<br>
 <br>
 證明在js中function的地位真的是很大......<br>
 
@@ -129,10 +131,17 @@ two = new Object()中Object是構造函數<br/>
 >總結：先有Object.prototype (鍊頂端) , Function.prototype繼承Object.prototype而生<br/>
 >最後, Function和Object和其它構造函數繼承Function.prototype生。<br/>
 
-所以原型鍊可以幹嘛? 可以呼叫parent的 method&proprerty, 也就是繼承啦!
+<img src="https://www.evernote.com/l/ABerZUl8ytRL1KHVx1JSFhIgl6a-dZwdZBMB/image.png"/><br/>
+取自Jichao Ouyan大的圖, 我覺得非常好幫助理解!
+-----
+所以原型鍊可以幹嘛? 可以呼叫parent的 method&proprerty <br/>
+
+>但是__proto__的使用上一個不小心就會大破壞原有的繼承關係,<br/>
+>所以養成良好的習慣, 實務上使用‵getPropertyOf‵ 來取原型鍊即可<br/>
+<br/>
 
 <img src="http://www.mollypages.org/tutorials/jsobj_full.jpg">
 
 
 
-參考資料: [creeperyang大神的github](https://github.com/creeperyang/blog/issues/9), [TB技術共筆huli大](http://blog.techbridge.cc/2017/04/22/javascript-prototype/?utm_source=tuicool&utm_medium=referral), [Jason大-聽你blog](http://www.jasonsi.com/2017/03/15/36/), [mollypages](http://www.mollypages.org/tutorials/js.mp)
+參考資料: [creeperyang大神的github](https://github.com/creeperyang/blog/issues/9), [TB技術共筆huli大](http://blog.techbridge.cc/2017/04/22/javascript-prototype/?utm_source=tuicool&utm_medium=referral), [Jason大-聽你blog](http://www.jasonsi.com/2017/03/15/36/), [mollypages](http://www.mollypages.org/tutorials/js.mp), [Jichao Ouyan大的理解JavaScript的原型链和继承](理解JavaScript的原型链和继承)
