@@ -4,6 +4,29 @@
 
 ---
 
+1.
+
+`__proto__`: 對象__proto__屬性就是他所對應的原型對象(所有東西都有__proto__)
+
+>Every JavaScript object has a second JavaScript object (or null ,<br/>
+>but this is rare) associated with it. This second object is known as a prototype, <br/>
+>and the first object inherits properties from the prototype.<<br/>
+>   from book: Javascript權威指南
+
+每個js對象一定對應一個原型對象, 並從原型對象繼承屬性和方法, 如何對應? 答案就是__proto__
+
+2.
+
+`prototype`: 只有函數才有的prototype屬性, 因為沒有class的概念, js就用 function 來模擬類似的概念.
+
+當你創建一個函數的時候, JS會自動為你的函數新增prototype屬性(對應到的是空對象), 而一旦把這個函數以new 調用, js就會幫你新建一個這個構造函數的instance,  
+
+而這個instance 繼承了構造函數中的所有屬性 和 方法, 
+
+也可以這麼說: 這個instance 通過設置自己的__proto__指向承構造函數的prototype來實現這種繼承
+
+---
+
 JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的class 相似語法糖), 但確實是有個類似的機制來實現
 `new + 構造函數`
 
@@ -34,30 +57,7 @@ JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的
 
 -----
 
-1.
-
-`__proto__`: 對象__proto__屬性就是他所對應的原型對象(所有東西都有__proto__)
-
->Every JavaScript object has a second JavaScript object (or null ,<br/>
->but this is rare) associated with it. This second object is known as a prototype, <br/>
->and the first object inherits properties from the prototype.<<br/>
->   from book: Javascript權威指南
-
-每個js對象一定對應一個原型對象, 並從原型對象繼承屬性和方法, 如何對應? 答案就是__proto__
-
-2.
-
-`prototype`: 只有函數才有的prototype屬性, 因為沒有class的概念, js就用 function 來模擬類似的概念.
-
-當你創建一個函數的時候, JS會自動為你的函數新增prototype屬性(對應到的是空對象), 而一旦把這個函數以new 調用, js就會幫你新建一個這個構造函數的instance,  
-
-而這個instance 繼承了構造函數中的所有屬性 和 方法, 
-
-也可以這麼說: 這個instance 通過設置自己的__proto__指向承構造函數的prototype來實現這種繼承
-
----
-
-<b>為什麼要提到這兩個饒口的東西呢? </b>
+<b>為什麼一開始要提到prototype跟__proto__這兩個饒口的東西呢? </b>
 
 因為Javascript正是使用這兩個東西合作來實現了原型鍊以及對象的繼承! 
 
