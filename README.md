@@ -32,10 +32,10 @@
 
 `new` 一個instance的 new 做了什麼事 ?
 
-    1. 創造出一個新的Object 叫做O <br/>
-    2. 將這個O繼承原型鍊(__proto__指向該函數的prototype) <br/>
-    3. 在這個O裡, 呼叫該函數 <br/>
-    4. return O <br/>
+1. 創造出一個新的Object 叫做O <br/>
+2. 將這個O繼承原型鍊(__proto__指向該函數的prototype) <br/>
+3. 在這個O裡, 呼叫該函數 <br/>
+4. return O <br/>
 
 
 4.
