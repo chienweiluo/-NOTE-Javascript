@@ -30,6 +30,16 @@
 
 3.
 
+`new` 一個instance的 new 做了什麼事 ?
+
+    1. 創造出一個新的Object 叫做O <br/>
+    2. 將這個O繼承原型鍊(__proto__指向該函數的prototype) <br/>
+    3. 在這個O裡, 呼叫該函數 <br/>
+    4. return O <br/>
+
+
+4.
+
 Javascript 裡面所有的數據類型都是對象Object, 所以繼承以及原型鍊的就是為了將所有的Object聯繫起來而生的
 
 
@@ -84,7 +94,7 @@ JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的
 
 >你有一個叫做`Person`的函數, 就可以把`Person`當作constructor, <br/>
 >利用`var obj = new Person()`來new出一個`Person` 的instance,<br/>
->並且可以在>`Person.prototype`上面加上你想讓所有instance共享的屬性或方法<br/>
+>並且可以在`Person.prototype`上面加上你想讓所有instance共享的屬性或方法<br/>
 
 通過Person函數所new出來的對象, 都自動有一個__proto__屬性, 它的值是指向Person.prototype的, Person.prototype是直接由Object生成 , 但Person.prototype.__proto__也是一個對象, 所以說, 最後就會指向Object.prototype, 這也就是原型鍊的頂端.
 
@@ -92,16 +102,17 @@ tips: 這時候使用this關鍵字, 就會指向新建造的實例nick,peter
 
  a: 實例 peter,nick<br>
  Person: 函式 (new 出 instance nick,peter)<br>
-
-<b>所以在這裡組成的原型鍊:
-    a.__proto__ == Person.prototype ,  [ a的原型對象指向了Person的原型對象 ]<br/>
-    a.__proto__.__proto__ == Person.prototype.__proto__ ,<br/>
-    Person.prototype.__proto__ == Object.prototype [Person的原型對象的原型對象就是Object的原型對象]<br/></b>
-
+ 
+        所以在這裡組成的原型鍊:
+        a.__proto__== Person.prototype ,  [ a的原型對象指向了Person的原型對象 ]<br/>
+        a.__proto__.__proto__== Person.prototype.__proto__ ,<br/>
+        Person.prototype.__proto__ == Object.prototype [Person的原型對象的原型對象就是Object的原型對象]<br/>
+<b>    
 在這個例子中可以知道: <br>
 instance的__proto__就是Function.prototype(因為是function把它製造出來的)<br>
 Function的__proto__就是製造它出來的Function.prototype.(Function instanceof Function== true)<br>
 Function.prototype的__proto__ 會指向 Object.prototype(之後就是null)<br>
+</b>
 <br>
 證明在js中function的地位真的是很大......<br>
 
