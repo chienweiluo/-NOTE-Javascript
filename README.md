@@ -51,7 +51,7 @@ JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的
       this.age= age;
     }
     
-    Person.prototype = {
+    Person.prototype.log = {
         country: 'China'
     }
 
