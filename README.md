@@ -29,14 +29,23 @@
 也可以這麼說: 這個instance 通過設置自己的__proto__指向承構造函數的prototype來實現這種繼承
 
 3.
-
 `new` 一個instance的 new 做了什麼事 ?
 
-1. 創造出一個新的Object 叫做O <br/>
-2. 將這個O繼承原型鍊(__proto__指向該函數的prototype) <br/>
-3. 在這個O裡, 呼叫該函數 <br/>
-4. return O <br/>
+    1. 創造出一個新的Object 叫做O <br/>
+    2. 將這個O繼承原型鍊(__proto__指向該函數的prototype) <br/>
+    3. 在這個O裡, 呼叫該函數 <br/>
+    4. return O <br/>
 
+        function newObj(Constructor, arguments) {
+        var o = new Object();
+        // 讓 o 繼承原型鍊
+        o.__proto__ = Constructor.prototype;
+        // 執行建構函式
+        Constructor.apply(o, arguments);
+        // 回傳建立好的物件
+        return o;
+        }
+        var nick = newObj(Person, ['nick', 18]);
 
 4.
 
