@@ -1,3 +1,10 @@
 # JavascriptNote
-Noting some details about Js or more<br/>
-可以看各branch! 
+
+---
+
+## ES6的 let/ const/ var  
+
+
+
+
+參考資料: 
