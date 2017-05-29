@@ -7,7 +7,6 @@
 照著脈絡
 
 `
-
 1, 查詢取得DOM
 
 2, 修改class屬性
@@ -19,7 +18,6 @@
 5, 動畫
 
 6, 包裝
-
 `
 
 ### 1, 查詢取得DOM
@@ -66,15 +64,15 @@ getElementById() & getElementsByTagName() 仍可以很好的使用
 
 設定多種屬性用 物件
 
-    Object.assign(oneElment.{
-        id: 'a',
-        value: 'b',
-        name: 'CCC'
-    })
+    Object.assign(oneElment.{
+            id: 'a',
+            value: 'b',
+            name: 'CCC'
+        })
       
 刪除屬性
-  
-    oneElement.value =null  //屬性內容為空
+
+    oneElement.value =null  //屬性內容為空
       
       
 提到為何不用getAttribute() setAttribute() removeAttribute() ? 原因是這些方式是直接修改HTML屬性, 都會導致瀏覽器*重繪* , 對效能來說有很大的影響
@@ -87,7 +85,7 @@ CSS樣式(行內)
   
 取得元素的css值
 
-    getComputedStyle(element).getPropopertyValue('padding-top') // 這時又是一般的命名
+    getComputedStyle(element).getPropopertyValue('padding-top') // 這時又是一般的命名
       
 -----
 
@@ -114,15 +112,15 @@ CSS樣式(行內)
     
 -建立
 
-        const newEl = document.createElement('div')
-        
-        const newTextNode = document.createTextNode('HELLOOOOO')
+    const newEl = document.createElement('div')
+
+    const newTextNode = document.createTextNode('HELLOOOOO')
 
 -移除
 
-        parentElement.removeChold(el1)   //參照父元素移除DOM
-        
-        el1.parentNode.removeChild(el1)  //自己移除自己
+    parentElement.removeChold(el1)   //參照父元素移除DOM
+
+    el1.parentNode.removeChild(el1)  //自己移除自己
         
         
 -修改元素的內容
@@ -130,8 +128,7 @@ CSS樣式(行內)
 
 1, innerHTML
 
-
-        element.innerHTML= '<div><p>HELLLOO<p></div>'
+    element.innerHTML= '<div><p>HELLLOO<p></div>'
 
 
 2, documentFragment
