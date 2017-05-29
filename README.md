@@ -60,34 +60,34 @@ getElementById() & getElementsByTagName() 仍可以很好的使用
 
 屬性
 
-        const oneValue= oneElement.value  //取得屬性value
+    const oneValue= oneElement.value  //取得屬性value
 
-        oneElement.value=""hello"  //改變這個屬性內容為哈囉
-    
-  設定多種屬性用 物件
-  
-      Object.assign(oneElment.{
-          id: 'a',
-          value: 'b',
-          name: 'CCC'
-      })
+    oneElement.value=""hello"  //改變這個屬性內容為哈囉
+
+設定多種屬性用 物件
+
+    Object.assign(oneElment.{
+        id: 'a',
+        value: 'b',
+        name: 'CCC'
+    })
       
-  刪除屬性
+刪除屬性
   
-      oneElement.value =null  //屬性內容為空
+    oneElement.value =null  //屬性內容為空
       
       
-  提到為何不用getAttribute() setAttribute() removeAttribute() ? 原因是這些方式是直接修改HTML屬性, 都會導致瀏覽器*重繪* , 對效能來說有很大的影響
+提到為何不用getAttribute() setAttribute() removeAttribute() ? 原因是這些方式是直接修改HTML屬性, 都會導致瀏覽器*重繪* , 對效能來說有很大的影響
 
-  除非是要修改的屬性真的需要重繪(例如表格德COLSPAN)例外
+除非是要修改的屬性真的需要重繪(例如表格德COLSPAN)例外
 
 CSS樣式(行內)
-  
+
     element.style.paddingTop = '2em'  //用駝峰
   
-  取得元素的css值
-    
-      getComputedStyle(element).getPropopertyValue('padding-top') // 這時又是一般的命名
+取得元素的css值
+
+    getComputedStyle(element).getPropopertyValue('padding-top') // 這時又是一般的命名
       
 -----
 
@@ -113,19 +113,18 @@ CSS樣式(行內)
     el1.appendChild(newEl)
     
 -建立
-    
+
         const newEl = document.createElement('div')
-    
+        
         const newTextNode = document.createTextNode('HELLOOOOO')
 
 -移除
 
         parentElement.removeChold(el1)   //參照父元素移除DOM
-    
-
+        
         el1.parentNode.removeChild(el1)  //自己移除自己
-    
-
+        
+        
 -修改元素的內容
 
 
