@@ -58,9 +58,8 @@ getElementById() & getElementsByTagName() 仍可以很好的使用
 
 屬性
 
-    const oneValue= oneElement.value  //取得屬性value
-
-    oneElement.value=""hello"  //改變這個屬性內容為哈囉
+    const oneValue= oneElement.value  //取得屬性value
+    oneElement.value=""hello"  //改變這個屬性內容為哈囉
 
 設定多種屬性用 物件
 
