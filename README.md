@@ -60,9 +60,9 @@ getElementById() & getElementsByTagName() 仍可以很好的使用
 
 屬性
 
-    const oneValue= oneElement.value  //取得屬性value
+        const oneValue= oneElement.value  //取得屬性value
 
-    oneElement.value=""hello"  //改變這個屬性內容為哈囉
+        oneElement.value=""hello"  //改變這個屬性內容為哈囉
     
   設定多種屬性用 物件
   
@@ -114,32 +114,39 @@ CSS樣式(行內)
     
 -建立
     
-    const newEl = document.createElement('div')
-    const newTextNode = document.createTextNode('HELLOOOOO')
+        const newEl = document.createElement('div')
+    
+        const newTextNode = document.createTextNode('HELLOOOOO')
 
 -移除
 
-    parentElement.removeChold(el1)   //參照父元素移除DOM
-     
-    el1.parentNode.removeChild(el1)  //自己移除自己
+        parentElement.removeChold(el1)   //參照父元素移除DOM
+    
+
+        el1.parentNode.removeChild(el1)  //自己移除自己
+    
 
 -修改元素的內容
 
+
 1, innerHTML
 
-    element.innerHTML="<div><p>HELLLOO<p></div>"
+
+        element.innerHTML= '<div><p>HELLLOO<p></div>'
+
 
 2, documentFragment
 
-    const text = document.createTextNode('continue reading...')
-    const hr = document.createElement('hr')
-    const fragment = document.createDocumentFragment()
 
-    fragment.appendChild(text)
+        const text = document.createTextNode('continue reading...')
+        const hr = document.createElement('hr')
+        const fragment = document.createDocumentFragment()
 
-    fragment.appendChild(hr)
+        fragment.appendChild(text)
 
-    element.appendChild(fragment)
+        fragment.appendChild(hr)
+
+        element.appendChild(fragment)
     
 -----
 
@@ -243,5 +250,5 @@ window.requestAnimationFrame()
 
 參考資料, 範例: 
 [The Basics of DOM Manipulation in Vanilla JavaScript (No jQuery)](https://www.sitepoint.com/dom-manipulation-vanilla-javascript-no-jquery/),[ [心得] 都2017年了  學學用原生JS來操作DOM吧](https://www.ptt.cc/bbs/Web_Design/M.1491563726.A.508.html),[W3Cschool],[菜鳥教程]
-
+,[MDN]
 
