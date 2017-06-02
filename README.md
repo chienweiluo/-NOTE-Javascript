@@ -7,7 +7,51 @@
 
 在解釋之前, 要先知道JS的 `提升(Hoisting)` 的特性
 
-{...}
+>变量声明提升(Variable hoisting)<br/>
+>JavaScript 变量的另一特别之处是，你可以引用稍后声明的变量而不会引发异常。这一概念称为变量声明提升(hoisting)；
+>JavaScript 变量感觉上是被“提升”或移到了所有函数和语句之前。然而提升后的变量将返回 undefined 值。<br/>
+>所以在使用或引用某个变量之后进行声明和初始化操作，这个被提升的引用仍将得到 undefined 值。<br/>
+>取自<MDN 語法和數據類型> <br/>
+
+也就是說, 用var等的變量表明符號時, 會將這行程式碼放到程式的最上面, 而因為還沒有賦予任何值, 所以會log出‵undefined‵
+
+(let/const其實也會, 但死區暫不討論)
+
+    var myvar = "my value";
+
+    (function() {
+      console.log(myvar); // undefined
+      var myvar = "local value";
+    })();
+    
+    //就等於
+    
+    var myvar = "my value";
+ 
+    (function() {
+      var myvar;
+      console.log(myvar); // undefined
+      myvar = "local value";
+    })();
+    
+    // var被提升到塊中的最上方, 所以 undefined
+
+
+函數提升: `对于函数，只有函数声明会被提升到顶部，而不包括函数表达式。`
+
+函數聲明
+
+    foo() //ok~
+
+    function foo(){...}
+   
+    
+函數表達式
+
+    foo1(); // not a function  <--因為不被視為函數, 是被視為用var表明的一個變量
+
+    var foo1 = function(){...}
+
 
 ---
 
@@ -69,6 +113,6 @@ let 與const 宣告就是以區塊語句為分界的作用域
 
 
 參考資料: 
-[維克的煩惱](http://www.victsao.com/blog/81-javascript/83-javascript-variate-const),[從ES6開始的Javascript學習生活](https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part3/var_const_naming.html), [Day 05: ES6篇 - let與const ](http://ithelp.ithome.com.tw/articles/10185142)
+    [維克的煩惱](http://www.victsao.com/blog/81-javascript/83-javascript-variate-const),[從ES6開始的Javascript學習生活](https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part3/var_const_naming.html), [Day 05: ES6篇 - let與const ](http://ithelp.ithome.com.tw/articles/10185142),[MDN變量](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Grammar_and_types#Array_literals)
 
 
