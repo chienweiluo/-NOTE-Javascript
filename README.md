@@ -129,5 +129,5 @@ example2:
 ,[如何理解和熟练运用js中的call及apply？](https://www.zhihu.com/question/20289071)
 ,[js笔记——call,apply,bind使用笔记](http://www.cnblogs.com/52fhy/p/5118877.html)
 ,[MDN:Function.prototype.bind()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
-
+,[CodeData](http://www.codedata.com.tw/javascript/essential-javascript-11-what-is-this/)
 
