@@ -178,5 +178,6 @@ X.prototype --> X生成的所有instance 可共享X 的屬性及方法
         instance2.sayAge(); //22
 
 
+ 20170716 03:56 4hr
 
 參考資料: [于江水大大的原型鍊相關文章](http://yujiangshui.com/)
