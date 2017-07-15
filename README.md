@@ -1,163 +1,59 @@
 # JavascriptNote
 
-## JS原型鍊
+## JS原型鍊 - 創建對象
 
 ---
+(其實這一篇也完完整整是原型鍊, 也就是原型繼承, 但如果都打在同一篇怕有篇幅太長的疑慮, 就想把創建對象的方式獨立一個branch.)
+
 ### 先知道
 
-1.
+1. 在JS可以使用構造函數/原型鍊在創建對象, 最好的方法當然是各取各好的地方
 
-`__proto__`: 對象__proto__屬性就是他所對應的原型對象(所有對象都有__proto__)
+2. 繼承: 為面向對象的語言(OO)的基礎(封裝、繼承、多型 >順序也是如此)之一, 一般來說子類別會比父類別更具體化, 
 
->Every JavaScript object has a second JavaScript object (or null ,<br/>
->but this is rare) associated with it. This second object is known as a prototype, <br/>
->and the first object inherits properties from the prototype.<<br/>
->   from book: Javascript權威指南
+造物主創造前100人的時候, 發現同樣的事情竟然要做100次有夠麻煩, 於是就觀察這100個人, 發現了每個人都有共同的地方, 
 
-每個js對象一定對應一個原型對象, 並從原型對象繼承屬性和方法, 如何對應? 答案就是 __proto__
 
-像是如果調用了a.country(下面Person的例子), 發現a對象裡面並沒有這個屬性, js就會從__proto__, 一直往上(原型鍊)查找, 如果有的話就使用country屬性, 如果沒有的話就直到Object.prototype 為止, 因為以上就會 return null了
+[造物工廠時代] 于是做了一個機器 將這個機器設定功能(共同的特點), 再加點個性(每個人不同)的方法, 這樣造人就方便多了
 
-2.
+接著, 用這個機器要創造動物的時候, 發現動物的某些設置(例如陸上動物"奔跑"不夠快)錯了, 因為沒有解決`對象識別`的問題, 就不得已只能把所有動物都改一遍
 
-`prototype`: 只有函數才有的prototype屬性, 因為沒有class的概念, js就用 function 來模擬類似的概念.
+V
 
-當你創建一個函數的時候, JS會自動為你的函數新增prototype屬性(對應到的是空對象), 而一旦以new 調用, js就會幫你新建一個這個構造函數的instance,  
+[繼承物種時代] 這時候發現人跟動物也有很多的相同點, 但又不太一樣, 所以要進行更高層的`抽象`(更詳細的將相同點抽出來), 於是造物主抽象出來基本的類別 動
 
-而這個instance 繼承了構造函數中的所有屬性 和 方法, 
+物模板, 以這個類別繼承出陸上動物模板/海上動物模板, 各有各的特點, 像陸上動物有奔跑, 海上動物有游泳
 
-也可以這麼說: 這個instance 通過設置自己的__proto__指向承構造函數的prototype來實現這種繼承
+而回到原本造人的動作, 人屬於陸上動物, 所以人類模板繼承了陸上動物模板, 並添加各種人類共同的屬性, 像是站立行走或感情等等
 
-3.
-`new` 一個instance的 new 做了什麼事 ?
+之後開始創造人這個個體, 因為已經有了人類模板, 所以只有基於這個人類模板, 創造各個實例, 然後對這個實例添加人的各種個性
 
-    1. 創造出一個新的Object 叫做O <br/>
-    2. 將這個O繼承原型鍊(__proto__指向該函數的prototype) <br/>
-    3. 在這個O裡, 呼叫該函數 <br/>
-    4. return O <br/>
+于是這樣解決了重複製造的麻煩性, 在也解決了對象識別的問題, 這就是繼承
 
-        function newObj(Constructor, arguments) {
-        var o = new Object();
-        // 讓 o 繼承原型鍊
-        o.__proto__ = Constructor.prototype;
-        // 執行建構函式
-        Constructor.apply(o, arguments);
-        // 回傳建立好的物件
-        return o;
-        }
-        var nick = newObj(Person, ['nick', 18]);
 
-4.
+統整是:  將相同會使用到的屬性或方法先`抽`出來, 定義高度抽象的基本類別, 然後在`繼承基本類別擴展`出更詳細的子類別, 然後就是不斷得更具體, 直到可以創建`各種`個體, 某種程度相似于剛剛提到的 封裝> 繼承> 多型 的動作
 
-Javascript 裡面所有的數據類型都是對象Object, 所以繼承以及原型鍊的就是為了將所有的Object聯繫起來而生的
+> 主要的目的: 封裝: 降低互相依賴的程度, 繼承: 程式碼再用, 多型: 避免重複的工作, 站在巨人的肩膀上 
+> - 提高可維護性
+
+
+##### 構造函數
 
 
 
----
 
-### 本文
+##### 原型繼承
 
-JS 在ES6之後雖然號稱有了完整 OO的架構, 但還是沒有class(es6的class 相似語法糖), 但確實是有個類似的機制來實現
+通過原型實現繼承的時候, 不可以使用對象 {} 操作, 這樣會重寫原型鍊
 
-作者在設計`extend` 的時候, 不像其他語言有`class`的觀念, 是通過`new` 一個`constructor` 來實現
+        ...
+        Son.prototype = new Dad()    
+        Son.prototype = {...}
+        //NONONONONONONONONONONONO
+        
+>>>
 
-`new + 構造函數`
-
-    //呼叫constructor
-    
-    function Person(name, age){
-      this.name= name;
-      this.age= age;
-    }
-    
-    Person.prototype.log = {
-        country: 'China'
-    }
-
-    var nick = new Person('nick',18)
-    var peter = new Person('peter',18)
-    
-    console.log(nick.name)    //nick
-    console.log(peter.name)   //peter
-    console.log(nick.country)    //China
-    console.log(peter.country)    //China
+##### 組合繼承
 
 
-
-裡頭Person 就是構造函數, 可以用new 出一個instance
-
-但是如果在Person 裡頭加入一個function, 在name 跟 age這兩個屬性下, 很明顯是每一個instance(nick, peter)都會不一樣, 但是剛剛加入的function卻是在做同一件事情(但是其實還是佔了兩份空間, 也就是根本是不同的兩個function)
-
-所以就把這個function 抽了出來, 變成所有Person都可以共享的方法.
-
-因為構造函數有一個缺點就是沒辦法共享屬性和方法, 所以......
-
-要共享屬性和方法的話, 就要用到 `prototype` 了
-
-所以就想到一個把function綁到 `Person.prototype` 上面, 以讓所有Person的 instance 都可以共享這個辦法
-
-
->所有實例對象需要共享的屬性和方法就會放到.prototype裡, 而不需要共享的就會放在構造函數constructor <br>
->所以只要更動prototype對象, 就會同時影響到所有instance
-
-
->你有一個叫做`Person`的函數, 就可以把`Person`當作constructor, <br/>
->利用`var obj = new Person()`來new出一個`Person` 的instance,<br/>
->並且可以在`Person.prototype`上面加上你想讓所有instance共享的屬性或方法<br/>
-
-通過Person函數所new出來的對象, 都自動有一個__proto__屬性, 它的值是指向Person.prototype的, Person.prototype是直接由Object生成 , 但Person.prototype.__proto__也是一個對象, 所以說, 最後就會指向Object.prototype, 這也就是原型鍊的頂端.
-
-tips: 這時候使用this關鍵字, 就會指向新建造的實例nick,peter
-
- a: 實例 peter,nick<br>
- Person: 函式 (new 出 instance nick,peter)<br>
- 
-        所以在這裡組成的原型鍊:
-        a.__proto__== Person.prototype ,  [ a的原型對象指向了Person的原型對象 ]<br/>
-        a.__proto__.__proto__== Person.prototype.__proto__ ,<br/>
-        Person.prototype.__proto__ == Object.prototype [Person的原型對象的原型對象就是Object的原型對象]<br/>
-<b>    
-在這個例子中可以知道: <br>
-instance的__proto__就是Function.prototype(因為是function把它製造出來的)<br>
-Function的__proto__就是製造它出來的Function.prototype.(Function instanceof Function== true)<br>
-Function.prototype的__proto__ 會指向 Object.prototype(之後就是null)<br>
-</b>
-<br>
-證明在js中function的地位真的是很大......<br>
-
------
-
-<b>為什麼一開始要提到prototype跟__proto__這兩個饒口的東西呢? </b>
-
-因為Javascript正是使用這兩個東西合作來實現了原型鍊以及對象的繼承! 
-
-而構造函數, 是通過prototype來儲存將來要共享的屬性和方法, 也可以設置prototype來指向現存的對象來繼承被繼承的對象
-
-對象的__proto__指向自己構造函數的prototype。
-
-`obj.__proto__.__proto__...`的原型鍊就此產生, 包括操作符instanceof正是通過探測`obj.__proto__.__proto__... === Constructor.prototype`来验证obj是否是Constructor的实例。
-
-    var one = {x: 1};
-    var two = new Object();
-    one.__proto__ === Object.prototype // true
-    two.__proto__ === Object.prototype // true
-    one.toString === one.__proto__.toString // true
-
-two = new Object()中Object是構造函數<br/>
-所以two.__proto__就是Object.prototype<br/>
-最後one，ES規範定義對象字面量的原型就是Object.prototype。<br/>
-
-
->總結：先有Object.prototype (鍊頂端) , Function.prototype繼承Object.prototype而生<br/>
->最後, Function和Object和其它構造函數繼承Function.prototype生。<br/>
-
-<img src="https://www.evernote.com/l/ABerZUl8ytRL1KHVx1JSFhIgl6a-dZwdZBMB/image.png"/><br/>
-取自Jichao Ouyan大的圖, 我覺得非常好幫助理解!
------
-所以原型鍊可以幹嘛? 可以呼叫parent的 method&proprerty <br/>
-
->但是__proto__的使用上一個不小心就會大破壞原有的繼承關係,<br/>
->所以養成良好的習慣, 實務上使用‵getPropertyOf‵ 來取原型鍊即可<br/>
-<br/> 
-
-參考資料: [creeperyang大神的github](https://github.com/creeperyang/blog/issues/9), [TB技術共筆huli大](http://blog.techbridge.cc/2017/04/22/javascript-prototype/?utm_source=tuicool&utm_medium=referral), [Jason大-聽你blog](http://www.jasonsi.com/2017/03/15/36/), [Jichao Ouyan大的理解JavaScript的原型链和继承](理解JavaScript的原型链和继承)
+參考資料: [于江水大大的原型鍊相關文章](http://yujiangshui.com/)
