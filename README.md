@@ -1,11 +1,8 @@
 # JavascriptNote
 
----
-
-## vanillaJS
+## some commonly used manipulations by vanillaJS
 
 照著脈絡
-
 
 
 1, 查詢取得DOM
