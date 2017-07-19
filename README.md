@@ -1,8 +1,8 @@
 # JavascriptNote
 
-## JS原型鍊 - 創建對象
+***JS原型鍊 - 創建對象***
 
-(其實這一篇也完完整整是原型鍊, 也就是原型繼承, 但如果都打在同一篇怕有篇幅太長的疑慮, 就想把創建對象的方式獨立一個branch.)
+(其實這一篇也完完整整是原型鍊相關, 但如果都打在同一篇怕有篇幅太長的疑慮, 就想把創建對象的方式獨立一個branch.)
 
 ### 先知道
 
@@ -44,17 +44,19 @@ V
 
 其實不用知道也可以往下看ㄎㄎ
 
+
+
 #### 構造函數
 
 引用類型: Object/ Array/ Function/ Date/ RegExp
 
-=> 生成instance, 也就是`對象定義`
+=> 用 `new` 生成instance, 也就是`對象定義`
 
 用new 生成instance 就是構造函數
 
 > 以上面的引用類型: var a = new Object() <= 相同 => var a = {} 
 
->new 構造子做的事??
+>new 構造子做的事 ??
 
         function newObj(cons,args){
             var O = new cons(); // 創造一個新的Object O
@@ -84,7 +86,7 @@ V
         var instance2 = new SubType();
         console.log(instance2.colors); ["red", "blue", "green"]
 
-解決了原型無法向超類傳遞參數的問題(原型缺點2) 子類的不同實例也不會互相影響(原型缺點1)
+除了解決識別的問題也解決了原型無法向超類傳遞參數的問題(原型缺點2) 子類的不同實例也不會互相影響(原型缺點1)
 
 但
 
@@ -109,9 +111,18 @@ V
 
 2. 超類別定義的方法對子類來說是不可見的
 
-#### 原型繼承
+註: 任何普通函數都可以是構造函數, 而字首大寫只是一個約定俗成. 
 
-X.prototype --> X生成的所有instance 可共享X 的屬性及方法
+#### 原型
+
+每個函數都有一個prototype屬性, 指向一個對象, 這個對象就是 "原型"
+
+而每個new 出來的instance 都有一個 __proto__ 屬性, 他指向構造函數的原型對象
+
+=> 當所有的instance 都能通過__proto__訪問到原型對象時, 此原型對象的方法和屬性即為 "共享"
+
+X.prototype.func1 --> X生成的所有instance 可共享X 的屬性及方法(func1...)
+
 
 所以, 解決資源浪費的方法明顯就是原型prototype了(構造函式缺點1), 而因為是共享父類的屬性及方法, 也直接解決構造函式缺點2了
 
@@ -135,8 +146,9 @@ X.prototype --> X生成的所有instance 可共享X 的屬性及方法
         //NONONONONONONONONONONONO
         
 
+註: 可透過`in`來查找一個對象是否有某一個屬性或方法, 無論在instance 或 原型對象.
 
-#### 解決辦法 > 組合繼承
+#### 解決辦法 > 組合使用
 
 構+原
 
@@ -178,6 +190,10 @@ X.prototype --> X生成的所有instance 可共享X 的屬性及方法
         instance2.sayAge(); //22
 
 
- 20170716 03:56 4hr
 
+
+ 20170716 03:56 4hr
+ 20170720 06:52 modified
+ 
+ 
 參考資料: [于江水大大的原型鍊相關文章](http://yujiangshui.com/)
