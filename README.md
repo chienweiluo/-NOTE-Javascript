@@ -1,26 +1,14 @@
 # JavascriptNote
 
-## JS原型鍊
+***JS原型鍊***
 
----
 ### 先知道
 
 1.
 
-`__proto__`: 對象__proto__屬性就是他所對應的原型對象(所有對象都有__proto__)
+`prototype`: 所有函數都有一個prototype屬性, 指向一個對象, 指向一個對象, 這個對象就是"原型"
 
->Every JavaScript object has a second JavaScript object (or null ,<br/>
->but this is rare) associated with it. This second object is known as a prototype, <br/>
->and the first object inherits properties from the prototype.<<br/>
->   from book: Javascript權威指南
-
-每個js對象一定對應一個原型對象, 並從原型對象繼承屬性和方法, 如何對應? 答案就是 __proto__
-
-像是如果調用了a.country(下面Person的例子), 發現a對象裡面並沒有這個屬性, js就會從__proto__, 一直往上(原型鍊)查找, 如果有的話就使用country屬性, 如果沒有的話就直到Object.prototype 為止, 因為以上就會 return null了
-
-2.
-
-`prototype`: 只有函數才有的prototype屬性, 因為沒有class的概念, js就用 function 來模擬類似的概念.
+因為沒有class的概念, js就用 function 來模擬類似的概念.
 
 當你創建一個函數的時候, JS會自動為你的函數新增prototype屬性(對應到的是空對象), 而一旦以new 調用, js就會幫你新建一個這個構造函數的instance,  
 
@@ -28,7 +16,21 @@
 
 也可以這麼說: 這個instance 通過設置自己的__proto__指向承構造函數的prototype來實現這種繼承
 
-3.
+
+`__proto__`: 而每個new 出來的instance 都有__proto__屬性, 他指向構造函數的原型對象 (所有實例都有__proto__)
+
+>Every JavaScript object has a second JavaScript object (or null ,<br/>
+>but this is rare) associated with it. This second object is known as a prototype, <br/>
+>and the first object inherits properties from the prototype.<<br/>
+>   from book: Javascript權威指南
+
+每個js對象一定對應一個原型對象, 並從原型對象繼承屬性和方法, 如何對應? 答案就是 __proto__ (這個過程也可以先理解成原型鍊)
+
+像是如果調用了a.country(下面Person的例子), 發現a對象裡面並沒有這個屬性, js就會從__proto__, 一直往上(原型鍊)查找, 如果有的話就使用country屬性, 如果沒有的話就直到Object.prototype 為止, 因為以上就會 return null了
+
+
+2.
+
 `new` 一個instance的 new 做了什麼事 ?
 
     1. 創造出一個新的Object 叫做O <br/>
@@ -47,7 +49,9 @@
         }
         var nick = newObj(Person, ['nick', 18]);
 
-4.
+我認為這個new 也差不多就是所有構造函數裡最該理解的東西. 
+
+3.
 
 Javascript 裡面所有的數據類型都是對象Object, 所以繼承以及原型鍊的就是為了將所有的Object聯繫起來而生的
 
@@ -153,11 +157,60 @@ two = new Object()中Object是構造函數<br/>
 
 <img src="https://www.evernote.com/l/ABerZUl8ytRL1KHVx1JSFhIgl6a-dZwdZBMB/image.png"/><br/>
 取自Jichao Ouyan大的圖, 我覺得非常好幫助理解!
+
 -----
-所以原型鍊可以幹嘛? 可以呼叫parent的 method&proprerty <br/>
+差不多就是這樣囉......
+
+### 原型鍊
+
+與作用域鍊相似, 都是一次單向的查找過程, 我個人想像為透過__proto__ 或prototype 屬性之間向上查找的這個過程.
+
+ex. 所有函數都有的方法是從哪來的(例如toString, toValue等等) ??
+
+    function foo(){...}
+    var foo1 = new foo();
+    foo1.__proto__ == Function.prototype
+    Function.prototype.__proto__ == Object.prototype  // 這些共用的方法及屬性就是Object的原型對象上的
+    //Function 的原型對象同時是Object 的instance
+    Object.prototype.__proto__ == null // 這時我們稱為原型鍊的終點
+
+### 繼承
+
+繼承的定義上面都有敘述了
+
+而理解之後, 在這裡提及構造函數的繼承, 以及原型的繼承
+
+        function Dad(name, age){
+            this.name = name;
+            this.age= age;
+        }
+
+        Dad.prototype.sayName = function(){
+            console.log(this.name)
+        }
+
+//用原型宣告函式, 同時解決資源浪費(構造函數)與複製程式碼(工廠模式)的問題
+
+> 構造函式的繼承
+
+        function Son(name, age, job){
+            Person.call(this, name, age);  // 父的操作在子之中重現一遍
+            this.job = job
+        }
+
+> 原型的繼承
+
+        Son.prototype = new Dad(name, age);
+        Son.prototype.getName = function(){
+            return this. name;
+        }
+
+原型鍊實務上可以幹嘛? 可以呼叫parent的 method&proprerty <br/>
 
 >但是__proto__的使用上一個不小心就會大破壞原有的繼承關係,<br/>
 >所以養成良好的習慣, 實務上使用‵getPropertyOf‵ 來取原型鍊即可<br/>
 <br/> 
+
+
 
 參考資料: [creeperyang大神的github](https://github.com/creeperyang/blog/issues/9), [TB技術共筆huli大](http://blog.techbridge.cc/2017/04/22/javascript-prototype/?utm_source=tuicool&utm_medium=referral), [Jason大-聽你blog](http://www.jasonsi.com/2017/03/15/36/), [Jichao Ouyan大的理解JavaScript的原型链和继承](理解JavaScript的原型链和继承)
