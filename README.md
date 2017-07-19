@@ -1,6 +1,6 @@
 # JavascriptNote
 
-## some commonly used manipulations by vanillaJS
+**some commonly used manipulations by vanillaJS**
 
 照著脈絡
 
